@@ -8,7 +8,7 @@ public class Department implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//cariávies de instância
+	//variávies de instância
 	private Integer id;
 	private String name;
 	
