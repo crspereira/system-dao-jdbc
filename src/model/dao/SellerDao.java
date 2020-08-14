@@ -2,6 +2,8 @@ package model.dao;
 
 import java.util.List;
 
+//Classe responsável por definir as operaçãoes de acesso a dados (Acesso ao Banco de Dados) relacinado a Sellers
+//Classe definida como Interface para dar flexibilidade e preservação do Contrato de objetos de acesso a dados
 import model.entities.Seller;
 
 public interface SellerDao {

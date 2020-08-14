@@ -2,6 +2,9 @@ package application;
 
 import java.util.Date;
 
+import model.dao.DaoFactory;
+import model.dao.SellerDao;
+import model.dao.toimplement.SellerDaoJDBC;
 import model.entities.Department;
 import model.entities.Seller;
 
@@ -15,6 +18,9 @@ public class Program {
 		
 		Seller seller = new Seller(21, "Bob", "bob@gmail", new Date(), 3000.00, obj);
 		System.out.println(seller);
+		
+		//validando a instanciação do "new SellerDaoJDBC()" pela interface chamando a Factory 
+		SellerDao sellerDao = DaoFactory.createSellerDao();
 
 	}
 
