@@ -3,6 +3,8 @@ package model.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+//Serializable para os objetos serem transformados em sequencia de Bytes.
+//Na lingugem JAVA isso permite que os objetos sejam gravados em arquivos, trafegado em rede etc...
 public class Seller implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
