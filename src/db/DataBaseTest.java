@@ -31,9 +31,8 @@ public class DataBaseTest {
 			throw new DbException(e.getMessage());
 		}
 		finally {
-			DB.closeStatementSet(st);
+			DB.closeStatement(st);
 			DB.closeResultSet(rs);
-			DB.closeConnection();
 		}
 	}
 

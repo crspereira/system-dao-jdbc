@@ -71,7 +71,7 @@ public class DB {
 	}
 	
 	//close do Statement
-	public static void closeStatementSet(Statement st) {
+	public static void closeStatement(Statement st) {
 		if (st != null) {
 			try {
 				st.close();

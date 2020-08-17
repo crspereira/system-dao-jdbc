@@ -6,6 +6,8 @@ import java.util.List;
 //Classe definida como Interface para dar flexibilidade e preservação do Contrato de objetos de acesso a dados
 import model.entities.Seller;
 
+//Classe responsável por definir as operaçãoes de acesso a dados (Acesso ao Banco de Dados) relacionado ao Seller
+//Classe definida como Interface para dar flexibilidade e preservação do Contrato de objetos de acesso a dados
 public interface SellerDao {
 	
 	public void insert(Seller obj);
