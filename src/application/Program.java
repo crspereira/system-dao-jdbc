@@ -20,6 +20,8 @@ public class Program {
 
 		//validando leitura de dados
 		SellerDao sellerDao2 = DaoFactory.createSellerDao();
+		
+		System.out.println("==== TEST 1: Seller findById ====");
 		Seller seller2 = sellerDao2.findById(3);
 		System.out.println(seller2);
 		

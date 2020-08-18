@@ -60,19 +60,10 @@ public class SellerDaoJDBC implements SellerDao{
 			//criando/instanciando o objeto "Seller" associado ao "Department" na memória
 			if (rs.next()) { //testa se a consulta retornou algum registro
 				
-				//instanciando e setando o Objeto Department
-				Department dep = new Department();
-				dep.setId(rs.getInt("DepartmentId"));
-				dep.setName(rs.getString("DepName"));
-				
-				//instanciando e setando o Objeto Seller
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBaseSalary(rs.getDouble("BaseSalary"));
-				obj.setBirthDate(rs.getDate("BirthDate"));
-				obj.setDepartment(dep); //traz o objeto department instanciado inteiro
+				//instanciando e setando o Objeto Department atravéz da função "instantiateDepartment"
+				Department dep = instantiateDepartment(rs);
+				//instanciando e setando o Objeto Seller atravéz da função "instantiateSeller"
+				Seller obj = instantiateSeller(rs, dep);
 				
 				return obj;
 			}
@@ -86,7 +77,27 @@ public class SellerDaoJDBC implements SellerDao{
 			DB.closeResultSet(rs);
 		}
 	}
-
+	//função auxiliar que instancia o objeto Seller
+	//ajuda da Reutilização do código muito verboso
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBaseSalary(rs.getDouble("BaseSalary"));
+		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setDepartment(dep); //traz o objeto department instanciado inteiro
+		return obj;
+	}
+	//função auxiliar que instancia o objeto Department
+	//ajuda da Reutilização do código muito verboso
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
+	}
+	
 	@Override
 	public List<Seller> findAll() {
 		// TODO Auto-generated method stub
