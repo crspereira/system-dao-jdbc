@@ -22,18 +22,25 @@ public class Program {
 		//SellerDao sellerDao1 = DaoFactory.createSellerDao();
 
 		//validando leitura de dados
-		SellerDao sellerDao2 = DaoFactory.createSellerDao();
+		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
 		System.out.println("==== TEST 1: Seller findById ====");
-		Seller seller2 = sellerDao2.findById(3);
+		Seller seller2 = sellerDao.findById(3);
 		System.out.println(seller2);
 		
 		System.out.println("\n==== TEST 2: Seller findByDepartment ====");
 		Department department = new Department(2, null);
-		List<Seller> list = sellerDao2.findByDepartment(department);
+		List<Seller> list = sellerDao.findByDepartment(department);
 		for (Seller obj : list) {
 			System.out.println(obj);	
 		}
+		
+		System.out.println("\n==== TEST 3: Seller findByDepartment ====");
+		list = sellerDao.findAll();
+		for (Seller obj : list) {
+			System.out.println(obj);	
+		}
+		
 		
 		
 		

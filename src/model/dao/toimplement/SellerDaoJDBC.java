@@ -103,8 +103,50 @@ public class SellerDaoJDBC implements SellerDao{
 	
 	@Override
 	public List<Seller> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT seller.*,department.Name as DepName "
+				  + "FROM seller INNER JOIN department " 
+				  + "ON seller.DepartmentId = department.Id "
+				  + "ORDER BY Name");
+					
+			//resultado da consulta SQL em formato de tabela é armazenado na variável rs
+			rs = st.executeQuery(); //aponta como padrão para a posição O, não contem objeto necessário instanciar 
+			
+			//criando uma lista para gravar os Vendores e Departamentos
+			List<Seller> list = new ArrayList<Seller>();
+			Map<Integer, Department> map = new HashMap<>(); // Map para armazenar objeto department
+			
+			//criando/instanciando o objetos "Seller" associado ao mesmo "Department" na memória
+			while (rs.next()) { //testa se a consulta retornou algum registro
+				
+				//pega departmentId dentro do map
+				Department dep = map.get(rs.getInt("DepartmentId"));
+				
+				//caso não exista o departmentId no map se instancia um e o grava no map
+				if (dep == null) {
+					//instanciando e setando o Objeto Department atravéz da função "instantiateDepartment"
+					dep = instantiateDepartment(rs);
+					map.put(rs.getInt("DepartmentId"), dep);
+				}
+				
+				//instanciando e setando o Objeto Seller atravéz da função "instantiateSeller"
+				Seller obj = instantiateSeller(rs, dep);
+				
+				//gravando na lista
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 
